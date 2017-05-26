@@ -1,7 +1,5 @@
-toto = 2;
-toto * 2;
-tata = 28;
-
-toto = toto * (tata + 5 );
+toto = 5;
+if (toto == 4){toto = 7;}
+18;
 toto;
 

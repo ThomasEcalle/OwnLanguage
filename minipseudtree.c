@@ -38,7 +38,9 @@ const char* node2String(Node *node) {
 	case NTMULT:  return "NTMULT";
 	case NTDIV:   return "NTDIV";
 	case NTPOW:   return "NTPOW";
+	case NTDOUBLEEQUAL:   return "NTDOUBLEEQUAL";
 	case NTAFF:   return "NTAFF";
+	case NTIF:   return "NTIF";
 	case NTVAR:   
 			res = (char *)malloc(sizeof(char) * 32);
 			sprintf(res, "NTVAR -> %s", node->var);

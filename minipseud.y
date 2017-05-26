@@ -20,14 +20,15 @@ Node root;
 
 
 %token   <node> NUM VAR
-%token   <node> PLUS MIN MULT DIV POW AFF
-%token   OP_PAR CL_PAR COLON 
+%token   <node> PLUS MIN MULT DIV POW AFF IF DOUBLEEQUAL
+%token   OP_PAR CL_PAR OP_BRACKET CL_BRACKET COLON
 %token   EOL
 
 
 %type   <node> Instlist
 %type   <node> Inst
 %type   <node> Expr
+%type   <node> BoolExpr
   
 
 %left OR
@@ -60,10 +61,18 @@ Instlist:
 Inst:
     Expr COLON { $$ = $1; } 
 	| VAR AFF Expr COLON {$$ =  nodeChildren($2, $1, $3);}
-	
+	| IF OP_PAR BoolExpr CL_PAR OP_BRACKET Inst CL_BRACKET
+						{ 
+							$$ = nodeChildren($1,$3,$6);
+						}
   ;
 
+	
+BoolExpr:
 
+	Expr DOUBLEEQUAL Expr { $$ = nodeChildren($2,$1,$3); }
+
+	;
 Expr:
   NUM			{ $$ = $1; }
   | VAR { $$ = $1; }

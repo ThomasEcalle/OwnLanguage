@@ -45,6 +45,9 @@ double evalExpr(Node *node) {
 				/ evalExpr(node->children[1]);
 		case NTPOW: return pow(evalExpr(node->children[0]),
 				evalExpr(node->children[1]));
+		case NTDOUBLEEQUAL:
+			return evalExpr(node->children[0])
+				== evalExpr(node->children[1]);
 		default: 
 			printf("Error in evalExpr ... Wrong node type: %s\n", node2String(node));
 			exit(1);
@@ -62,6 +65,12 @@ void evalInst(Node* node) {
 		return;
 	case NTAFF:
 		addVariable(node->children[0]->var, evalExpr(node->children[1]));
+		return;
+	case NTIF:
+		if ( evalExpr(node->children[0]) ){
+			evalInst(node->children[1]);
+		}
+
 		return;
 	case NTVAR:
 	case NTNUM:

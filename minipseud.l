@@ -12,6 +12,7 @@ empty    [ \t]+
 num   [0-9]
 int    {num}+
 exp  [eE][+-]?{int}
+if_statement "if"
 var   [a-z]+
 real      {int}("."{int})?{exp}?
 
@@ -25,6 +26,14 @@ real      {int}("."{int})?{exp}?
 
 "("   return(OP_PAR);
 ")"   return(CL_PAR);
+
+"{"   return(OP_BRACKET);
+"}"   return(CL_BRACKET);
+
+{if_statement} {
+	yylval.node = createNode(NTIF);
+    return(IF);
+}
 
 {var}    {
     yylval.node = createNode(NTVAR);
@@ -43,8 +52,8 @@ real      {int}("."{int})?{exp}?
 "*"   { yylval.node = createNode(NTMULT); return(MULT); }
 "/"   { yylval.node = createNode(NTDIV); return(DIV); }
 "^"   { yylval.node = createNode(NTPOW); return(POW); }
+"=="  { yylval.node = createNode(NTDOUBLEEQUAL); return(DOUBLEEQUAL); }
 "="  { yylval.node = createNode(NTAFF); return(AFF); }
-
 
 
 

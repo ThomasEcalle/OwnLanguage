@@ -47,20 +47,24 @@
      DIV = 263,
      POW = 264,
      AFF = 265,
-     OP_PAR = 266,
-     CL_PAR = 267,
-     COLON = 268,
-     EOL = 269,
-     OR = 270,
-     AND = 271,
-     NEQ = 272,
-     EQ = 273,
-     LET = 274,
-     GET = 275,
-     LT = 276,
-     GT = 277,
-     NOT = 278,
-     NEG = 279
+     IF = 266,
+     DOUBLEEQUAL = 267,
+     OP_PAR = 268,
+     CL_PAR = 269,
+     OP_BRACKET = 270,
+     CL_BRACKET = 271,
+     COLON = 272,
+     EOL = 273,
+     OR = 274,
+     AND = 275,
+     NEQ = 276,
+     EQ = 277,
+     LET = 278,
+     GET = 279,
+     LT = 280,
+     GT = 281,
+     NOT = 282,
+     NEG = 283
    };
 #endif
 
@@ -78,7 +82,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 82 "minipseud.tab.h"
+#line 86 "minipseud.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
