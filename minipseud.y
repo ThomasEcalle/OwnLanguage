@@ -59,14 +59,15 @@ Instlist:
 
 Inst:
     Expr COLON { $$ = $1; } 
-	|VAR AFF Expr COLON {$$ =  nodeChildren(createNode(NTAFF), $1, $3);}
-	| VAR COLON {$$ = $1;}
+	| VAR AFF Expr COLON {$$ =  nodeChildren($2, $1, $3);}
+	
   ;
 
 
 Expr:
   NUM			{ $$ = $1; }
-    | Expr PLUS Expr   { $$ = nodeChildren($2, $1, $3); }
+  | VAR { $$ = $1; }
+  | Expr PLUS Expr   { $$ = nodeChildren($2, $1, $3); }
   | Expr MIN Expr      { $$ = nodeChildren($2, $1, $3); }
   | Expr MULT Expr     { $$ = nodeChildren($2, $1, $3); }
   | Expr DIV Expr      { $$ = nodeChildren($2, $1, $3); }

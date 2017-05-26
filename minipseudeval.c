@@ -29,8 +29,12 @@ double evalExpr(Node *node) {
 	{
 		case NTEMPTY:  return 0.0;
 		case NTNUM: return node->val;
-		case NTVAR: 
+		case NTVAR:
+		if (getVariableByName(node->var) != NULL){
 			return getVariableByName(node->var)->val;
+		}
+		printf("Error, %s has not been initialized !" , node->var);
+		exit(1);
 		case NTPLUS: return evalExpr(node->children[0])
 				+ evalExpr(node->children[1]);
 		case NTMIN: return evalExpr(node->children[0])
@@ -57,7 +61,7 @@ void evalInst(Node* node) {
 		evalInst(node->children[1]);
 		return;
 	case NTAFF:
-		addVariable(node->children[0]->var, node->children[1]->val);
+		addVariable(node->children[0]->var, evalExpr(node->children[1]));
 		return;
 	case NTVAR:
 	case NTNUM:
