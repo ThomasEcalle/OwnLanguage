@@ -20,7 +20,7 @@ Node root;
 
 
 %token   <node> NUM VAR
-%token   <node> PLUS MIN MULT DIV POW AFF IF DOUBLEEQUAL WHILE DIFFERENT INF SUP INFOREQUAL SUPOREQUAL FOR
+%token   <node> PLUS MIN MULT DIV POW AFF IF ELSE DOUBLEEQUAL WHILE DIFFERENT INF SUP INFOREQUAL SUPOREQUAL FOR
 %token   OP_PAR CL_PAR OP_BRACKET CL_BRACKET COLON
 %token   EOL
 
@@ -61,9 +61,12 @@ Instlist:
 Inst:
     Expr COLON { $$ = $1; } 
 	| VAR AFF Expr COLON {$$ =  nodeChildren($2, $1, $3);}
-	| IF OP_PAR BoolExpr CL_PAR OP_BRACKET Instlist CL_BRACKET
+	| IF OP_PAR BoolExpr CL_PAR OP_BRACKET Instlist CL_BRACKET ELSE OP_BRACKET Instlist CL_BRACKET
 						{ 
-							$$ = nodeChildren($1,$3,$6);
+							Node* ifNode =  nodeChildren($1,$3,$6);
+							Node* elseNode = nodeChildren($8, $10, createNode(NTEMPTY));
+							
+							$$ = nodeChildren( createNode(NTIFELSE), ifNode, elseNode );
 						}
 	| WHILE OP_PAR BoolExpr CL_PAR OP_BRACKET Instlist CL_BRACKET
 						{ 

@@ -55,30 +55,31 @@ extern int yydebug;
      POW = 264,
      AFF = 265,
      IF = 266,
-     DOUBLEEQUAL = 267,
-     WHILE = 268,
-     DIFFERENT = 269,
-     INF = 270,
-     SUP = 271,
-     INFOREQUAL = 272,
-     SUPOREQUAL = 273,
-     FOR = 274,
-     OP_PAR = 275,
-     CL_PAR = 276,
-     OP_BRACKET = 277,
-     CL_BRACKET = 278,
-     COLON = 279,
-     EOL = 280,
-     OR = 281,
-     AND = 282,
-     NEQ = 283,
-     EQ = 284,
-     LET = 285,
-     GET = 286,
-     LT = 287,
-     GT = 288,
-     NOT = 289,
-     NEG = 290
+     ELSE = 267,
+     DOUBLEEQUAL = 268,
+     WHILE = 269,
+     DIFFERENT = 270,
+     INF = 271,
+     SUP = 272,
+     INFOREQUAL = 273,
+     SUPOREQUAL = 274,
+     FOR = 275,
+     OP_PAR = 276,
+     CL_PAR = 277,
+     OP_BRACKET = 278,
+     CL_BRACKET = 279,
+     COLON = 280,
+     EOL = 281,
+     OR = 282,
+     AND = 283,
+     NEQ = 284,
+     EQ = 285,
+     LET = 286,
+     GET = 287,
+     LT = 288,
+     GT = 289,
+     NOT = 290,
+     NEG = 291
    };
 #endif
 
@@ -93,7 +94,7 @@ typedef union YYSTYPE
 
 
 /* Line 2058 of yacc.c  */
-#line 97 "minipseud.tab.h"
+#line 98 "minipseud.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

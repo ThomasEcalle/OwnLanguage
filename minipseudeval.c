@@ -82,10 +82,10 @@ void evalInst(Node* node) {
 		addVariable(node->children[0]->var, evalExpr(node->children[1]));
 		return;
 	case NTIF:
+		
 		if ( evalExpr(node->children[0]) ){
 			evalInst(node->children[1]);
 		}
-
 		return;
 	case NTFOR:
 		addVariable(node->children[0]->children[0]->var, evalExpr(node->children[0]->children[1]));
@@ -96,12 +96,28 @@ void evalInst(Node* node) {
 		}
 
 		return;
+	
+	case NTELSE:
+		evalInst(node->children[0]);
+		return;
+		
 	case NTWHILE:
 		while ( evalExpr(node->children[0]) ){
 			evalInst(node->children[1]);
 		}
 
 		return;
+	case NTIFELSE:
+		if ( evalExpr((node->children[0])->children[0]) )
+		{
+			evalInst((node->children[0])->children[1]);
+		}
+		else
+		{
+			evalInst(node->children[1]);
+		}
+		return;
+		
 	case NTVAR:
 	case NTNUM:
 	case NTPLUS:

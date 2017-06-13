@@ -424,8 +424,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 25
-#define YY_END_OF_BUFFER 26
+#define YY_NUM_RULES 26
+#define YY_END_OF_BUFFER 27
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -433,13 +433,13 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[46] =
+static const flex_int16_t yy_accept[50] =
     {   0,
-        0,    0,   26,   25,    1,   24,   25,    2,    3,   13,
-       11,   12,   14,   10,   23,   19,   22,   25,   15,    9,
-        9,    9,    9,    4,    5,    1,   17,    0,   10,    0,
-       18,   16,   20,    9,    9,    6,    9,   10,    0,   10,
-        8,    9,    9,    7,    0
+        0,    0,   27,   26,    1,   25,   26,    2,    3,   14,
+       12,   13,   15,   11,   24,   20,   23,   26,   16,   10,
+       10,   10,   10,   10,    4,    5,    1,   18,    0,   11,
+        0,   19,   17,   21,   10,   10,   10,    6,   10,   11,
+        0,   11,   10,    9,   10,    7,   10,    8,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -456,8 +456,8 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,   18,    1,    1,   19,   19,   19,   19,
 
        20,   21,   19,   22,   23,   19,   19,   24,   19,   19,
-       25,   19,   19,   26,   19,   19,   19,   19,   27,   19,
-       19,   19,   28,    1,   29,    1,    1,    1,    1,    1,
+       25,   19,   19,   26,   27,   19,   19,   19,   28,   19,
+       19,   19,   29,    1,   30,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -474,58 +474,58 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[30] =
+static const YY_CHAR yy_meta[31] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    1,    1
+        2,    2,    2,    2,    2,    2,    2,    2,    1,    1
     } ;
 
-static const flex_int16_t yy_base[47] =
+static const flex_int16_t yy_base[51] =
     {   0,
-        0,    0,   61,   62,   58,   62,   44,   62,   62,   62,
-       62,   62,   62,   20,   62,   43,   42,   41,   62,    0,
-       30,   33,   31,   62,   62,   50,   62,   39,   21,   27,
-       62,   62,   62,    0,   23,    0,   25,   30,   34,   33,
-        0,   20,   23,    0,   62,   32
+        0,    0,   65,   66,   62,   66,   48,   66,   66,   66,
+       66,   66,   66,   21,   66,   47,   46,   45,   66,    0,
+       35,   33,   36,   34,   66,   66,   53,   66,   42,   22,
+       28,   66,   66,   66,    0,   26,   26,    0,   27,   31,
+       37,   35,   26,    0,   21,    0,   24,    0,   66,   33
     } ;
 
-static const flex_int16_t yy_def[47] =
+static const flex_int16_t yy_def[51] =
     {   0,
-       45,    1,   45,   45,   45,   45,   45,   45,   45,   45,
-       45,   45,   45,   45,   45,   45,   45,   45,   45,   46,
-       46,   46,   46,   45,   45,   45,   45,   45,   45,   45,
-       45,   45,   45,   46,   46,   46,   46,   45,   45,   45,
-       46,   46,   46,   46,    0,   45
+       49,    1,   49,   49,   49,   49,   49,   49,   49,   49,
+       49,   49,   49,   49,   49,   49,   49,   49,   49,   50,
+       50,   50,   50,   50,   49,   49,   49,   49,   49,   49,
+       49,   49,   49,   49,   50,   50,   50,   50,   50,   49,
+       49,   49,   50,   50,   50,   50,   50,   50,    0,   49
     } ;
 
-static const flex_int16_t yy_nxt[92] =
+static const flex_int16_t yy_nxt[97] =
     {   0,
         4,    5,    6,    7,    8,    9,   10,   11,   12,    4,
-       13,   14,   15,   16,   17,   18,    4,   19,   20,   20,
-       21,   20,   22,   20,   20,   20,   23,   24,   25,   28,
-       28,   29,   29,   34,   39,   39,   30,   30,   40,   30,
-       30,   38,   44,   43,   40,   40,   30,   42,   41,   30,
-       38,   26,   37,   36,   35,   33,   32,   31,   27,   26,
-       45,    3,   45,   45,   45,   45,   45,   45,   45,   45,
-       45,   45,   45,   45,   45,   45,   45,   45,   45,   45,
-       45,   45,   45,   45,   45,   45,   45,   45,   45,   45,
-       45
+       13,   14,   15,   16,   17,   18,    4,   19,   20,   21,
+       22,   20,   23,   20,   20,   20,   20,   24,   25,   26,
+       29,   29,   30,   30,   35,   41,   41,   31,   31,   42,
+       31,   31,   40,   48,   47,   46,   42,   31,   42,   45,
+       31,   44,   43,   40,   27,   39,   38,   37,   36,   34,
+       33,   32,   28,   27,   49,    3,   49,   49,   49,   49,
+       49,   49,   49,   49,   49,   49,   49,   49,   49,   49,
+       49,   49,   49,   49,   49,   49,   49,   49,   49,   49,
+       49,   49,   49,   49,   49,   49
 
     } ;
 
-static const flex_int16_t yy_chk[92] =
+static const flex_int16_t yy_chk[97] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,   14,
-       29,   14,   29,   46,   30,   30,   14,   29,   30,   14,
-       29,   38,   43,   42,   40,   39,   38,   37,   35,   38,
-       28,   26,   23,   22,   21,   18,   17,   16,    7,    5,
-        3,   45,   45,   45,   45,   45,   45,   45,   45,   45,
-       45,   45,   45,   45,   45,   45,   45,   45,   45,   45,
-       45,   45,   45,   45,   45,   45,   45,   45,   45,   45,
-       45
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+       14,   30,   14,   30,   50,   31,   31,   14,   30,   31,
+       14,   30,   40,   47,   45,   43,   42,   40,   41,   39,
+       40,   37,   36,   29,   27,   24,   23,   22,   21,   18,
+       17,   16,    7,    5,    3,   49,   49,   49,   49,   49,
+       49,   49,   49,   49,   49,   49,   49,   49,   49,   49,
+       49,   49,   49,   49,   49,   49,   49,   49,   49,   49,
+       49,   49,   49,   49,   49,   49
 
     } ;
 
@@ -768,7 +768,7 @@ YY_DECL
 		}
 
 	{
-#line 23 "minipseud.l"
+#line 24 "minipseud.l"
 
 
 #line 774 "lex.yy.c"
@@ -798,13 +798,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 46 )
+				if ( yy_current_state >= 50 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 62 );
+		while ( yy_base[yy_current_state] != 66 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -830,32 +830,32 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 25 "minipseud.l"
+#line 26 "minipseud.l"
 { /* Nothing */ }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 29 "minipseud.l"
+#line 30 "minipseud.l"
 return(OP_PAR);
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 30 "minipseud.l"
+#line 31 "minipseud.l"
 return(CL_PAR);
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 32 "minipseud.l"
+#line 33 "minipseud.l"
 return(OP_BRACKET);
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 33 "minipseud.l"
+#line 34 "minipseud.l"
 return(CL_BRACKET);
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 37 "minipseud.l"
+#line 38 "minipseud.l"
 {
 	yylval.node = createNode(NTIF);
     return(IF);
@@ -863,115 +863,123 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 41 "minipseud.l"
+#line 43 "minipseud.l"
+{
+	yylval.node = createNode(NTELSE);
+    return(ELSE);
+}
+	YY_BREAK
+case 8:
+YY_RULE_SETUP
+#line 48 "minipseud.l"
 {
 	yylval.node = createNode(NTWHILE);
     return(WHILE);
 }
 	YY_BREAK
-case 8:
+case 9:
 YY_RULE_SETUP
-#line 45 "minipseud.l"
+#line 52 "minipseud.l"
 {
 	yylval.node = createNode(NTFOR);
     return(FOR);
 }
 	YY_BREAK
-case 9:
+case 10:
 YY_RULE_SETUP
-#line 50 "minipseud.l"
+#line 57 "minipseud.l"
 {
     yylval.node = createNode(NTVAR);
     yylval.node->var = (char*)_strdup(yytext);
     return(VAR);
     }
 	YY_BREAK
-case 10:
+case 11:
 YY_RULE_SETUP
-#line 56 "minipseud.l"
+#line 63 "minipseud.l"
 {
     yylval.node = createNode(NTNUM);
     yylval.node->val = atof(yytext);
     return(NUM);
     }
 	YY_BREAK
-case 11:
-YY_RULE_SETUP
-#line 62 "minipseud.l"
-{ yylval.node = createNode(NTPLUS); return(PLUS); }
-	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 63 "minipseud.l"
-{ yylval.node = createNode(NTMIN); return(MIN); }
+#line 69 "minipseud.l"
+{ yylval.node = createNode(NTPLUS); return(PLUS); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 64 "minipseud.l"
-{ yylval.node = createNode(NTMULT); return(MULT); }
+#line 70 "minipseud.l"
+{ yylval.node = createNode(NTMIN); return(MIN); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 65 "minipseud.l"
-{ yylval.node = createNode(NTDIV); return(DIV); }
+#line 71 "minipseud.l"
+{ yylval.node = createNode(NTMULT); return(MULT); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 66 "minipseud.l"
-{ yylval.node = createNode(NTPOW); return(POW); }
+#line 72 "minipseud.l"
+{ yylval.node = createNode(NTDIV); return(DIV); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 67 "minipseud.l"
-{ yylval.node = createNode(NTDOUBLEEQUAL); return(DOUBLEEQUAL); }
+#line 73 "minipseud.l"
+{ yylval.node = createNode(NTPOW); return(POW); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 68 "minipseud.l"
-{ yylval.node = createNode(NTDIFFERENT); return(DIFFERENT); }
+#line 74 "minipseud.l"
+{ yylval.node = createNode(NTDOUBLEEQUAL); return(DOUBLEEQUAL); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 69 "minipseud.l"
-{ yylval.node = createNode(NTINFOREQUAL); return(INFOREQUAL); }
+#line 75 "minipseud.l"
+{ yylval.node = createNode(NTDIFFERENT); return(DIFFERENT); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 70 "minipseud.l"
-{ yylval.node = createNode(NTINF); return(INF); }
+#line 76 "minipseud.l"
+{ yylval.node = createNode(NTINFOREQUAL); return(INFOREQUAL); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 71 "minipseud.l"
-{ yylval.node = createNode(NTSUPOREQUAL); return(SUPOREQUAL); }
+#line 77 "minipseud.l"
+{ yylval.node = createNode(NTINF); return(INF); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 72 "minipseud.l"
-{ yylval.node = createNode(NTSUP); return(SUP); }
+#line 78 "minipseud.l"
+{ yylval.node = createNode(NTSUPOREQUAL); return(SUPOREQUAL); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 73 "minipseud.l"
-{ yylval.node = createNode(NTAFF); return(AFF); }
+#line 79 "minipseud.l"
+{ yylval.node = createNode(NTSUP); return(SUP); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 80 "minipseud.l"
-{ return(COLON); }
+{ yylval.node = createNode(NTAFF); return(AFF); }
 	YY_BREAK
 case 24:
-/* rule 24 can match eol */
 YY_RULE_SETUP
-#line 82 "minipseud.l"
-{ return(EOL); }
+#line 87 "minipseud.l"
+{ return(COLON); }
 	YY_BREAK
 case 25:
+/* rule 25 can match eol */
 YY_RULE_SETUP
-#line 83 "minipseud.l"
+#line 89 "minipseud.l"
+{ return(EOL); }
+	YY_BREAK
+case 26:
+YY_RULE_SETUP
+#line 90 "minipseud.l"
 ECHO;
 	YY_BREAK
-#line 974 "lex.yy.c"
+#line 982 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1264,7 +1272,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 46 )
+			if ( yy_current_state >= 50 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1292,11 +1300,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 46 )
+		if ( yy_current_state >= 50 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 45);
+	yy_is_jam = (yy_current_state == 49);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1972,4 +1980,4 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 83 "minipseud.l"
+#line 90 "minipseud.l"

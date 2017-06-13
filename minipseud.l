@@ -15,6 +15,7 @@ exp  [eE][+-]?{int}
 if_statement "if"
 while_statement "while"
 for_statement "for"
+else_statement "else"
 var   [a-z]+
 real      {int}("."{int})?{exp}?
 
@@ -38,6 +39,12 @@ real      {int}("."{int})?{exp}?
 	yylval.node = createNode(NTIF);
     return(IF);
 }
+
+{else_statement} {
+	yylval.node = createNode(NTELSE);
+    return(ELSE);
+}
+
 {while_statement} {
 	yylval.node = createNode(NTWHILE);
     return(WHILE);

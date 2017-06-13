@@ -17,11 +17,14 @@ enum NodeType {
 	NTIF = 330,
 	NTWHILE = 331,
 	NTDIFFERENT = 332,
-	NTSUP = 333,
-	NTSUPOREQUAL = 334,
+	NTELSE = 333,
+	NTIFELSE = 334,
+	
 	NTINF = 335,
 	NTINFOREQUAL = 336,
-	NTFOR = 337
+	NTFOR = 337,
+	NTSUP = 338,
+	NTSUPOREQUAL = 339
 };
    
 typedef struct Node {
