@@ -16,7 +16,12 @@ enum NodeType {
 	NTDOUBLEEQUAL = 329,
 	NTIF = 330,
 	NTWHILE = 331,
-	NTDIFFERENT = 332
+	NTDIFFERENT = 332,
+	NTSUP = 333,
+	NTSUPOREQUAL = 334,
+	NTINF = 335,
+	NTINFOREQUAL = 336,
+	NTFOR = 337
 };
    
 typedef struct Node {
