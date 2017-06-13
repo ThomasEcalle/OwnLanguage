@@ -14,7 +14,9 @@ enum NodeType {
 	NTEQ = 326,
 	NTAFF = 328,
 	NTDOUBLEEQUAL = 329,
-	NTIF = 330
+	NTIF = 330,
+	NTWHILE = 331,
+	NTDIFFERENT = 332
 };
    
 typedef struct Node {

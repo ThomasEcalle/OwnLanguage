@@ -1,5 +1,6 @@
-toto = 5;
-if (toto == 4){toto = 7;}
+toto = 0;
+if (toto == 5){toto = 7;titi=42;titi+toto;}
+while (toto != 5){toto = toto+1;toto;}
 18;
 toto;
 

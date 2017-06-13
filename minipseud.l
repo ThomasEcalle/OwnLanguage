@@ -13,6 +13,7 @@ num   [0-9]
 int    {num}+
 exp  [eE][+-]?{int}
 if_statement "if"
+while_statement "while"
 var   [a-z]+
 real      {int}("."{int})?{exp}?
 
@@ -30,9 +31,15 @@ real      {int}("."{int})?{exp}?
 "{"   return(OP_BRACKET);
 "}"   return(CL_BRACKET);
 
+
+
 {if_statement} {
 	yylval.node = createNode(NTIF);
     return(IF);
+}
+{while_statement} {
+	yylval.node = createNode(NTWHILE);
+    return(WHILE);
 }
 
 {var}    {
@@ -53,6 +60,7 @@ real      {int}("."{int})?{exp}?
 "/"   { yylval.node = createNode(NTDIV); return(DIV); }
 "^"   { yylval.node = createNode(NTPOW); return(POW); }
 "=="  { yylval.node = createNode(NTDOUBLEEQUAL); return(DOUBLEEQUAL); }
+"!="  { yylval.node = createNode(NTDIFFERENT); return(DIFFERENT); }
 "="  { yylval.node = createNode(NTAFF); return(AFF); }
 
 
