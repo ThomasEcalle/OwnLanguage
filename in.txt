@@ -1,6 +1,5 @@
 toto = 5;
-while (toto < 9){toto = toto+1;toto;}
-18+5;
-toto=0;
-41+1;
-for(i = 0; i < 3; i = i+1;){toto = toto + 1;toto;}
+toto;
+func chabada(toto){toto = toto * toto; titi=42;toto+titi;}
+toto=2;
+chabada(toto);

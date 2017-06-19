@@ -20,7 +20,7 @@ Node root;
 
 
 %token   <node> NUM VAR
-%token   <node> PLUS MIN MULT DIV POW AFF IF ELSE DOUBLEEQUAL WHILE DIFFERENT INF SUP INFOREQUAL SUPOREQUAL FOR
+%token   <node> PLUS MIN MULT DIV POW AFF IF ELSE DOUBLEEQUAL WHILE DIFFERENT INF SUP INFOREQUAL SUPOREQUAL FOR FUNCTION COMA
 %token   OP_PAR CL_PAR OP_BRACKET CL_BRACKET COLON
 %token   EOL
 
@@ -29,6 +29,8 @@ Node root;
 %type   <node> Inst
 %type   <node> Expr
 %type   <node> BoolExpr
+%type   <node> FUNC
+%type   <node> ARGS
   
 
 %left OR
@@ -61,6 +63,7 @@ Instlist:
 Inst:
     Expr COLON { $$ = $1; } 
 	| VAR AFF Expr COLON {$$ =  nodeChildren($2, $1, $3);}
+	| FUNC {$$=$1}
 	| IF OP_PAR BoolExpr CL_PAR OP_BRACKET Instlist CL_BRACKET ELSE OP_BRACKET Instlist CL_BRACKET
 						{ 
 							Node* ifNode =  nodeChildren($1,$3,$6);
@@ -78,6 +81,17 @@ Inst:
 						}
   ;
 
+ARGS:
+	VAR { $$ = nodeChildren(createNode(NTVAR), $1, createNode(NTEMPTY)); } 
+	| NUM { $$ = nodeChildren(createNode(NTNUM), $1, createNode(NTEMPTY)); } 
+	| VAR COMA ARGS { $$ = nodeChildren(createNode(NTARGS), $2, $1); }
+	| NUM COMA ARGS { $$ = nodeChildren(createNode(NTARGS), $2, $1); }
+FUNC:
+	FUNCTION VAR OP_PAR ARGS CL_PAR OP_BRACKET Instlist CL_BRACKET
+	{
+		$$=nodeChildren(createNode(NTFUNC),nodeChildren(createNode(NTEMPTY),$2,$4),$7);
+	}
+	
 	
 BoolExpr:
 
@@ -92,6 +106,7 @@ BoolExpr:
 Expr:
   NUM			{ $$ = $1; }
   | VAR { $$ = $1; }
+  | VAR OP_PAR ARGS CL_PAR { $$ = nodeChildren(createNode(NTFUNC2), $1, $3);  }
   | Expr PLUS Expr   { $$ = nodeChildren($2, $1, $3); }
   | Expr MIN Expr      { $$ = nodeChildren($2, $1, $3); }
   | Expr MULT Expr     { $$ = nodeChildren($2, $1, $3); }

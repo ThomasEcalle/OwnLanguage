@@ -9,6 +9,7 @@ struct variable
 {
 	char *name;
 	double val;
+	Node *funcNode;
 	struct variable *next;
 };
 
@@ -19,12 +20,13 @@ typedef variable* variablesList;
 variablesList list = NULL;
 
 variable* getVariableByName(char *vName);
-void addVariable(char *newName, double newValue);
+void addVariable(char *newName, double newValue,Node *funcNode);
 
 int printDepth = 0;
 int funcDepth = 0;
 
 double evalExpr(Node *node) {
+	// printf("le type de expr %d\n", node->type);
 	switch ( node->type ) 
 	{
 		case NTEMPTY:  return 0.0;
@@ -35,6 +37,20 @@ double evalExpr(Node *node) {
 		}
 		printf("Error, %s has not been initialized !" , node->var);
 		exit(1);
+		case NTFUNC2:
+		if (getVariableByName(node->children[0]->var) != NULL){
+			// printf("titi\n");
+			variable* func =  getVariableByName(node->children[0]->var);
+			// printf("tototo\n");
+			
+			// printf("function name : %s\n", func->name);
+			return evalInst(func->funcNode->children[1]);
+		}
+		else
+		{
+			printf("Error, %s has not been initialized2 !" , node->var);
+			exit(1);
+		}
 		case NTPLUS: return evalExpr(node->children[0])
 				+ evalExpr(node->children[1]);
 		case NTMIN: return evalExpr(node->children[0])
@@ -71,7 +87,9 @@ double evalExpr(Node *node) {
 
 
 void evalInst(Node* node) {
+	// printf("trolo\n");
 	double val;
+	// printf("le type de Inst %d\n", node->type);
 	switch ( node->type ) {
 	case NTEMPTY: return;
 	case NTINSTLIST:
@@ -79,7 +97,15 @@ void evalInst(Node* node) {
 		evalInst(node->children[1]);
 		return;
 	case NTAFF:
-		addVariable(node->children[0]->var, evalExpr(node->children[1]));
+		addVariable(node->children[0]->var, evalExpr(node->children[1]),NULL);
+		return;
+	case NTFUNC:
+		// printf("tututu\n");
+		addVariable(node->children[0]->children[0]->var, 42, node);
+		// printf("tatatatata\n");
+		return;
+	case NTFUNC2:
+		evalExpr(node);
 		return;
 	case NTIF:
 		
@@ -88,7 +114,7 @@ void evalInst(Node* node) {
 		}
 		return;
 	case NTFOR:
-		addVariable(node->children[0]->children[0]->var, evalExpr(node->children[0]->children[1]));
+		addVariable(node->children[0]->children[0]->var, evalExpr(node->children[0]->children[1]),NULL);
 		for (double i = node->children[0]->children[1]->val; evalExpr(node->children[1]->children[0])
 				;evalInst(node->children[1]->children[1]->children[1]))
 		{
@@ -140,6 +166,7 @@ void evalInst(Node* node) {
 */
 variable* getVariableByName(char *vName)
 {
+	// printf("tata\n");
 	variable *result = NULL;
 	variable *tmp = list;
 	
@@ -161,12 +188,13 @@ variable* getVariableByName(char *vName)
 	If the variable already exist, we only change it's value
 	Else, we create a new variable
 */
-void addVariable(char *newName, double newValue)
+void addVariable(char *newName, double newValue,Node *funcNode)
 {
 	variable *tmp = getVariableByName(newName);
 	if (tmp != NULL)
 	{
 		tmp->val = newValue;
+		tmp->funcNode = funcNode;
 		return;
 	}
 	
@@ -174,6 +202,7 @@ void addVariable(char *newName, double newValue)
 	
 	tmp->name = newName;
 	tmp->val = newValue;
+	tmp->funcNode = funcNode;
 	tmp->next = NULL;
 	
 	if (list == NULL)

@@ -16,6 +16,7 @@ if_statement "if"
 while_statement "while"
 for_statement "for"
 else_statement "else"
+function_statement "func"
 var   [a-z]+
 real      {int}("."{int})?{exp}?
 
@@ -35,6 +36,10 @@ real      {int}("."{int})?{exp}?
 
 
 
+{function_statement} {
+	yylval.node = createNode(NTFUNC);
+    return(FUNCTION);
+}
 {if_statement} {
 	yylval.node = createNode(NTIF);
     return(IF);
@@ -66,6 +71,7 @@ real      {int}("."{int})?{exp}?
     return(NUM);
     }
 
+	
 "+"   { yylval.node = createNode(NTPLUS); return(PLUS); }
 "-"   { yylval.node = createNode(NTMIN); return(MIN); }
 "*"   { yylval.node = createNode(NTMULT); return(MULT); }
@@ -85,5 +91,7 @@ real      {int}("."{int})?{exp}?
  
 
 ";"    { return(COLON); }
+
+","    { return(COMA); }
 
 "\n"   { return(EOL); }
