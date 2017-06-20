@@ -63,7 +63,7 @@ Instlist:
 Inst:
     Expr COLON { $$ = $1; } 
 	| VAR AFF Expr COLON {$$ =  nodeChildren($2, $1, $3);}
-	| FUNC {$$=$1}
+	| FUNC {$$=$1;}
 	| IF OP_PAR BoolExpr CL_PAR OP_BRACKET Instlist CL_BRACKET ELSE OP_BRACKET Instlist CL_BRACKET
 						{ 
 							Node* ifNode =  nodeChildren($1,$3,$6);
@@ -82,7 +82,8 @@ Inst:
   ;
 
 ARGS:
-	VAR { $$ = nodeChildren(createNode(NTVAR), $1, createNode(NTEMPTY)); } 
+	{ $$ = nodeChildren(createNode(NTVAR), createNode(NTEMPTY), createNode(NTEMPTY)); }
+	| VAR { $$ = nodeChildren(createNode(NTVAR), $1, createNode(NTEMPTY)); } 
 	| NUM { $$ = nodeChildren(createNode(NTNUM), $1, createNode(NTEMPTY)); } 
 	| VAR COMA ARGS { $$ = nodeChildren(createNode(NTARGS), $2, $1); }
 	| NUM COMA ARGS { $$ = nodeChildren(createNode(NTARGS), $2, $1); }

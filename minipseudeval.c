@@ -32,13 +32,13 @@ double evalExpr(Node *node) {
 		case NTEMPTY:  return 0.0;
 		case NTNUM: return node->val;
 		case NTVAR:
-		if (getVariableByName(node->var) != NULL){
+		if (getVariableByName(node->var) != NULL && getVariableByName(node->var)->funcNode == NULL){
 			return getVariableByName(node->var)->val;
 		}
 		printf("Error, %s has not been initialized !" , node->var);
 		exit(1);
 		case NTFUNC2:
-		if (getVariableByName(node->children[0]->var) != NULL){
+		if (getVariableByName(node->children[0]->var) != NULL && getVariableByName(node->children[0]->var)->funcNode != NULL){
 			// printf("titi\n");
 			variable* func =  getVariableByName(node->children[0]->var);
 			// printf("tototo\n");
@@ -48,7 +48,7 @@ double evalExpr(Node *node) {
 		}
 		else
 		{
-			printf("Error, %s has not been initialized2 !" , node->var);
+			printf("Error, %s has not been initialized2 !" , node->children[0]->var);
 			exit(1);
 		}
 		case NTPLUS: return evalExpr(node->children[0])

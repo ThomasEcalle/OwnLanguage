@@ -1,5 +1,7 @@
 toto = 5;
 toto;
-func chabada(toto){toto = toto * toto; titi=42;toto+titi;}
+func chabada(tata){toto = toto * toto; titi=42;toto+titi;}
 toto=2;
+chabada();
 chabada(toto);
+
