@@ -7,3 +7,5 @@ chabada(toto);
 toto = 100;
 if (toto > 10){toto = 7;titi=42;titi+toto;} else {42;}
 100 != 42;
+PRINT(100 < 200);
+PRINT("met poce bleu tout de suite");

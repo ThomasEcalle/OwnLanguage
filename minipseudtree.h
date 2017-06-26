@@ -27,7 +27,10 @@ enum NodeType {
 	NTSUPOREQUAL = 339,
 	NTFUNC = 340,
 	NTFUNC2 = 341,
-	NTARGS = 342
+	NTARGS = 342,
+	
+	NTSTRING = 343,
+	NTPRINT = 344
 };
    
 typedef struct Node {

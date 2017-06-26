@@ -17,6 +17,8 @@ while_statement "while"
 for_statement "for"
 else_statement "else"
 function_statement "func"
+print "PRINT"
+string \"(.*?)\"
 var   [a-z]+
 real      {int}("."{int})?{exp}?
 
@@ -40,6 +42,12 @@ real      {int}("."{int})?{exp}?
 	yylval.node = createNode(NTFUNC);
     return(FUNCTION);
 }
+
+{print} {
+	yylval.node = createNode(NTPRINT);
+    return(PRINT);
+}
+
 {if_statement} {
 	yylval.node = createNode(NTIF);
     return(IF);
@@ -57,6 +65,12 @@ real      {int}("."{int})?{exp}?
 {for_statement} {
 	yylval.node = createNode(NTFOR);
     return(FOR);
+}
+
+{string} {
+	yylval.node = createNode(NTSTRING);
+    yylval.node->var = (char*)_strdup(yytext);
+    return(STRING);
 }
 
 {var}    {
@@ -82,7 +96,7 @@ real      {int}("."{int})?{exp}?
 "<="  { yylval.node = createNode(NTINFOREQUAL); return(INFOREQUAL); }
 "<"  { yylval.node = createNode(NTINF); return(INF); }
 ">="  { yylval.node = createNode(NTSUPOREQUAL); return(SUPOREQUAL); }
-">="  { yylval.node = createNode(NTSUP); return(SUP); }
+">"  { yylval.node = createNode(NTSUP); return(SUP); }
 "="  { yylval.node = createNode(NTAFF); return(AFF); }
 
 

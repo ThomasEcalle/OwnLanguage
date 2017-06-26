@@ -21,6 +21,7 @@ variablesList list = NULL;
 
 variable* getVariableByName(char *vName);
 void addVariable(char *newName, double newValue,Node *funcNode);
+char* removeQuotes(char* mString);
 
 int printDepth = 0;
 int funcDepth = 0;
@@ -31,6 +32,7 @@ double evalExpr(Node *node) {
 	{
 		case NTEMPTY:  return 0.0;
 		case NTNUM: return node->val;
+		
 		case NTVAR:
 		if (getVariableByName(node->var) != NULL && getVariableByName(node->var)->funcNode == NULL){
 			return getVariableByName(node->var)->val;
@@ -107,12 +109,12 @@ void evalInst(Node* node) {
 	case NTFUNC2:
 		evalExpr(node);
 		return;
-	case NTIF:
+	/*case NTIF:
 		
 		if ( evalExpr(node->children[0]) ){
 			evalInst(node->children[1]);
 		}
-		return;
+		return;*/
 	case NTFOR:
 		addVariable(node->children[0]->children[0]->var, evalExpr(node->children[0]->children[1]),NULL);
 		for (double i = node->children[0]->children[1]->val; evalExpr(node->children[1]->children[0])
@@ -134,14 +136,21 @@ void evalInst(Node* node) {
 
 		return;
 	case NTIFELSE:
-		if ( evalExpr((node->children[0])->children[0]) )
+		if ( evalExpr((node->children[0])->children[0]) == 1)
 		{
 			evalInst((node->children[0])->children[1]);
 		}
 		else
 		{
-			evalInst(node->children[1]);
+			if ((node->children[1])->type != NTEMPTY)
+			{
+				evalInst((node->children[1])->children[0]);
+			}
 		}
+		return;
+	case NTSTRING:
+		
+		printf("%s" , removeQuotes(node->var));
 		return;
 		
 	case NTVAR:
@@ -151,6 +160,12 @@ void evalInst(Node* node) {
 	case NTMULT:
 	case NTDIV:
 	case NTPOW:
+	case NTDIFFERENT:
+	case NTDOUBLEEQUAL:
+	case NTINF:
+	case NTSUP:
+	case NTINFOREQUAL:
+	case NTSUPOREQUAL:
 		printf("%f\n", evalExpr(node));
 		return;
 	 
@@ -158,6 +173,26 @@ void evalInst(Node* node) {
 		printf("Error in evalInst ... Wrong node type: %s\n", node2String(node));
 		exit (1);
 	};
+}
+
+/*
+	Used to remove the String quotes
+*/
+char* removeQuotes(char* mString)
+{
+	int i = 0;
+	char* result = malloc( sizeof(char) * ( strlen(mString) - 3) );
+	int counter = 0;
+	for (i; i < strlen(mString); i++)
+	{
+		if (mString[i] != '\"')
+		{
+			result[counter] = mString[i];
+			counter++;
+		}
+	}
+	
+	return result;
 }
 
 
