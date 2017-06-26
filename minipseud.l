@@ -18,7 +18,7 @@ for_statement "for"
 else_statement "else"
 function_statement "func"
 print "PRINT"
-string \"(.*?)\"
+string \"([^\"]*)\"
 var   [a-z]+
 real      {int}("."{int})?{exp}?
 

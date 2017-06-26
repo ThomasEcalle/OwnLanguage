@@ -63,6 +63,7 @@ Instlist:
 Inst:
     Expr COLON { $$ = $1; } 
 	| VAR AFF Expr COLON {$$ =  nodeChildren($2, $1, $3);}
+	
 	| FUNC {$$=$1;}
 	| IF OP_PAR BoolExpr CL_PAR OP_BRACKET Instlist CL_BRACKET
 						{ 
@@ -116,6 +117,7 @@ Expr:
   NUM			{ $$ = $1; }
   | VAR { $$ = $1; }
   | STRING { $$ = $1; }
+  | STRING PLUS STRING { $$ = nodeChildren(createNode(NTCONCAT), $1, $3); }
   | VAR OP_PAR ARGS CL_PAR { $$ = nodeChildren(createNode(NTFUNC2), $1, $3);  }
   | Expr PLUS Expr   { $$ = nodeChildren($2, $1, $3); }
   | Expr MIN Expr      { $$ = nodeChildren($2, $1, $3); }

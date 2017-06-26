@@ -153,6 +153,10 @@ void evalInst(Node* node) {
 		printf("%s" , removeQuotes(node->var));
 		return;
 		
+	case NTCONCAT:
+		printf("%s%s" , removeQuotes((node->children[0])->var), removeQuotes((node->children[1])->var));
+		return;
+		
 	case NTVAR:
 	case NTNUM:
 	case NTPLUS:
