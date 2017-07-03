@@ -19,7 +19,7 @@ Node root;
 }
 
 
-%token   <node> NUM VAR STRING PRINT
+%token   <node> NUM VAR STRING PRINT PRINTLIST
 %token   <node> PLUS MIN MULT DIV POW AFF IF ELSE DOUBLEEQUAL WHILE DIFFERENT INF SUP INFOREQUAL SUPOREQUAL FOR FUNCTION COMA
 %token   OP_PAR CL_PAR OP_BRACKET CL_BRACKET COLON
 %token   EOL
@@ -116,6 +116,7 @@ BoolExpr:
 Expr:
   NUM			{ $$ = $1; }
   | VAR { $$ = $1; }
+  | PRINTLIST { $$ = $1; }
   | STRING { $$ = $1; }
   | STRING PLUS STRING { $$ = nodeChildren(createNode(NTCONCAT), $1, $3); }
   | VAR OP_PAR ARGS CL_PAR { $$ = nodeChildren(createNode(NTFUNC2), $1, $3);  }
@@ -126,7 +127,7 @@ Expr:
   | MIN Expr %prec NEG { $$ = nodeChildren($1, createNode(NTEMPTY), $2); }
   | Expr POW Expr      { $$ = nodeChildren($2, $1, $3); }
   | OP_PAR Expr CL_PAR { $$ = $2; }
-  | BoolExpr {$$ = $1}
+  | BoolExpr {$$ = $1;}
   | PRINT OP_PAR Expr CL_PAR { $$ = $3; }
   ;
 

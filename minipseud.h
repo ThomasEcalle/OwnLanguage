@@ -1,10 +1,8 @@
+/* A Bison parser, made by GNU Bison 2.7.  */
 
-/* A Bison parser, made by GNU Bison 2.4.1.  */
-
-/* Skeleton interface for Bison's Yacc-like parsers in C
+/* Bison interface for Yacc-like parsers in C
    
-      Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
-   Free Software Foundation, Inc.
+      Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
    
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -32,6 +30,15 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+#ifndef YY_YY_MINIPSEUD_TAB_H_INCLUDED
+# define YY_YY_MINIPSEUD_TAB_H_INCLUDED
+/* Enabling traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -43,58 +50,56 @@
      VAR = 259,
      STRING = 260,
      PRINT = 261,
-     PLUS = 262,
-     MIN = 263,
-     MULT = 264,
-     DIV = 265,
-     POW = 266,
-     AFF = 267,
-     IF = 268,
-     ELSE = 269,
-     DOUBLEEQUAL = 270,
-     WHILE = 271,
-     DIFFERENT = 272,
-     INF = 273,
-     SUP = 274,
-     INFOREQUAL = 275,
-     SUPOREQUAL = 276,
-     FOR = 277,
-     FUNCTION = 278,
-     COMA = 279,
-     OP_PAR = 280,
-     CL_PAR = 281,
-     OP_BRACKET = 282,
-     CL_BRACKET = 283,
-     COLON = 284,
-     EOL = 285,
-     OR = 286,
-     AND = 287,
-     NEQ = 288,
-     EQ = 289,
-     LET = 290,
-     GET = 291,
-     LT = 292,
-     GT = 293,
-     NOT = 294,
-     NEG = 295
+     PRINTLIST = 262,
+     PLUS = 263,
+     MIN = 264,
+     MULT = 265,
+     DIV = 266,
+     POW = 267,
+     AFF = 268,
+     IF = 269,
+     ELSE = 270,
+     DOUBLEEQUAL = 271,
+     WHILE = 272,
+     DIFFERENT = 273,
+     INF = 274,
+     SUP = 275,
+     INFOREQUAL = 276,
+     SUPOREQUAL = 277,
+     FOR = 278,
+     FUNCTION = 279,
+     COMA = 280,
+     OP_PAR = 281,
+     CL_PAR = 282,
+     OP_BRACKET = 283,
+     CL_BRACKET = 284,
+     COLON = 285,
+     EOL = 286,
+     OR = 287,
+     AND = 288,
+     NEQ = 289,
+     EQ = 290,
+     LET = 291,
+     GET = 292,
+     LT = 293,
+     GT = 294,
+     NOT = 295,
+     NEG = 296
    };
 #endif
-
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
 {
-
-/* Line 1676 of yacc.c  */
+/* Line 2058 of yacc.c  */
 #line 17 "minipseud.y"
 
 	struct Node *node;
 
 
-
-/* Line 1676 of yacc.c  */
-#line 98 "minipseud.tab.h"
+/* Line 2058 of yacc.c  */
+#line 103 "minipseud.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -103,4 +108,18 @@ typedef union YYSTYPE
 
 extern YYSTYPE yylval;
 
+#ifdef YYPARSE_PARAM
+#if defined __STDC__ || defined __cplusplus
+int yyparse (void *YYPARSE_PARAM);
+#else
+int yyparse ();
+#endif
+#else /* ! YYPARSE_PARAM */
+#if defined __STDC__ || defined __cplusplus
+int yyparse (void);
+#else
+int yyparse ();
+#endif
+#endif /* ! YYPARSE_PARAM */
 
+#endif /* !YY_YY_MINIPSEUD_TAB_H_INCLUDED  */

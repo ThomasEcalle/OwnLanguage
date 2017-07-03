@@ -18,6 +18,7 @@ for_statement "for"
 else_statement "else"
 function_statement "func"
 print "PRINT"
+printList "PRINTLIST"
 string \"([^\"]*)\"
 var   [a-z]+
 real      {int}("."{int})?{exp}?
@@ -46,6 +47,11 @@ real      {int}("."{int})?{exp}?
 {print} {
 	yylval.node = createNode(NTPRINT);
     return(PRINT);
+}
+
+{printList} {
+	yylval.node = createNode(NTPRINTLIST);
+    return(PRINTLIST);
 }
 
 {if_statement} {

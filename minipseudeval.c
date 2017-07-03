@@ -22,11 +22,13 @@ variablesList list = NULL;
 variable* getVariableByName(char *vName);
 void addVariable(char *newName, double newValue,Node *funcNode);
 char* removeQuotes(char* mString);
+void printVarList();
 
 int printDepth = 0;
 int funcDepth = 0;
 
 double evalExpr(Node *node) {
+	// printf("EVALEXPR\n");
 	// printf("le type de expr %d\n", node->type);
 	switch ( node->type ) 
 	{
@@ -81,6 +83,9 @@ double evalExpr(Node *node) {
 		case NTINFOREQUAL:
 			return evalExpr(node->children[0])
 				<= evalExpr(node->children[1]);
+		case NTPRINTLIST:
+			printVarList();
+			return 0.0;
 		default: 
 			printf("Error in evalExpr ... Wrong node type: %s\n", node2String(node));
 			exit(1);
@@ -89,6 +94,7 @@ double evalExpr(Node *node) {
 
 
 void evalInst(Node* node) {
+	// printf("EVALINST\n");
 	// printf("trolo\n");
 	double val;
 	// printf("le type de Inst %d\n", node->type);
@@ -156,7 +162,9 @@ void evalInst(Node* node) {
 	case NTCONCAT:
 		printf("%s%s" , removeQuotes((node->children[0])->var), removeQuotes((node->children[1])->var));
 		return;
-		
+	case NTPRINTLIST:
+			printVarList();
+			return;
 	case NTVAR:
 	case NTNUM:
 	case NTPLUS:
@@ -222,7 +230,30 @@ variable* getVariableByName(char *vName)
 	
 	return result;
 }
-
+void printVarList()
+{
+	int empty = 0;
+	printf("toto\n");
+	variable *tmp = list;
+	
+	while(tmp != NULL)
+	{
+		if (tmp->funcNode==NULL)
+		{
+			if (empty == 0)
+			{
+				empty = 1;
+				printf("List of all declared variables:\n");
+			}
+			printf("Name: %s\tValue: %f\n", tmp->name,tmp->val);
+		}
+		
+		tmp = tmp->next;
+	}
+	if (empty == 0)
+		printf("Variables list is empty:\n");
+	return;
+}
 /*
 	If the variable already exist, we only change it's value
 	Else, we create a new variable
