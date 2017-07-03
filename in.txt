@@ -1,7 +1,7 @@
 PRINTLIST;
 toto = 5;
 toto;
-func chabada(tata){toto = toto * toto; titi=42;toto+titi;}
+func chabada(tata){PRINT("JE SUIS CHABADA");PRINT("ou pas");PRINTLIST;toto = toto * toto; titi=42;toto+titi;}
 toto=2;
 chabada();
 chabada(toto);
