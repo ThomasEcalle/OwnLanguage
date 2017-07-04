@@ -34,6 +34,7 @@ const char* node2String(Node *node) {
 	 
 
 	case NTPLUS:  return "NTPLUS";
+	case NTARGS:  return "NTARGS";
 	case NTMIN:   return "NTMIN";
 	case NTMULT:  return "NTMULT";
 	case NTDIV:   return "NTDIV";

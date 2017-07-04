@@ -19,8 +19,8 @@ Node root;
 }
 
 
-%token   <node> NUM VAR
-%token   <node> PLUS MIN MULT DIV POW AFF IF ELSE DOUBLEEQUAL WHILE DIFFERENT INF SUP INFOREQUAL SUPOREQUAL FOR
+%token   <node> NUM VAR STRING PRINT PRINTLIST
+%token   <node> PLUS MIN MULT DIV POW AFF IF ELSE DOUBLEEQUAL WHILE DIFFERENT INF SUP INFOREQUAL SUPOREQUAL FOR FUNCTION COMA
 %token   OP_PAR CL_PAR OP_BRACKET CL_BRACKET COLON
 %token   EOL
 
@@ -29,6 +29,9 @@ Node root;
 %type   <node> Inst
 %type   <node> Expr
 %type   <node> BoolExpr
+%type   <node> FUNC
+%type   <node> ARG
+%type   <node> ARGS
   
 
 %left OR
@@ -61,6 +64,15 @@ Instlist:
 Inst:
     Expr COLON { $$ = $1; } 
 	| VAR AFF Expr COLON {$$ =  nodeChildren($2, $1, $3);}
+	
+	| FUNC {$$=$1;}
+	| IF OP_PAR BoolExpr CL_PAR OP_BRACKET Instlist CL_BRACKET
+						{ 
+							Node* ifNode =  nodeChildren($1,$3,$6);
+							Node* elseNode = createNode(NTEMPTY);
+							
+							$$ = nodeChildren( createNode(NTIFELSE), ifNode, elseNode );
+						}
 	| IF OP_PAR BoolExpr CL_PAR OP_BRACKET Instlist CL_BRACKET ELSE OP_BRACKET Instlist CL_BRACKET
 						{ 
 							Node* ifNode =  nodeChildren($1,$3,$6);
@@ -68,6 +80,7 @@ Inst:
 							
 							$$ = nodeChildren( createNode(NTIFELSE), ifNode, elseNode );
 						}
+	
 	| WHILE OP_PAR BoolExpr CL_PAR OP_BRACKET Instlist CL_BRACKET
 						{ 
 							$$ = nodeChildren($1,$3,$6);
@@ -78,6 +91,22 @@ Inst:
 						}
   ;
 
+ARGS:
+	{ $$ = createNode(NTEMPTY); }
+	| ARG  { $$ = nodeChildren(createNode(NTARGS), $1, createNode(NTEMPTY)); } 
+	| ARG COMA ARGS { $$ = nodeChildren(createNode(NTARGS), $1, $3); }
+  
+	;
+ARG:
+	VAR { $$ = $1; }
+	|NUM { $$ = $1; }
+	;
+FUNC:
+	FUNCTION VAR OP_PAR ARGS CL_PAR OP_BRACKET Instlist CL_BRACKET
+	{
+		$$=nodeChildren(createNode(NTFUNC),nodeChildren(createNode(NTEMPTY),$2,$4),$7);
+	}
+	;
 	
 BoolExpr:
 
@@ -92,6 +121,10 @@ BoolExpr:
 Expr:
   NUM			{ $$ = $1; }
   | VAR { $$ = $1; }
+  | PRINTLIST { $$ = $1; }
+  | STRING { $$ = $1; }
+  | STRING PLUS STRING { $$ = nodeChildren(createNode(NTCONCAT), $1, $3); }
+  | VAR OP_PAR ARGS CL_PAR { $$ = nodeChildren(createNode(NTFUNC2), $1, $3);  }
   | Expr PLUS Expr   { $$ = nodeChildren($2, $1, $3); }
   | Expr MIN Expr      { $$ = nodeChildren($2, $1, $3); }
   | Expr MULT Expr     { $$ = nodeChildren($2, $1, $3); }
@@ -99,6 +132,8 @@ Expr:
   | MIN Expr %prec NEG { $$ = nodeChildren($1, createNode(NTEMPTY), $2); }
   | Expr POW Expr      { $$ = nodeChildren($2, $1, $3); }
   | OP_PAR Expr CL_PAR { $$ = $2; }
+  | BoolExpr {$$ = $1;}
+  | PRINT OP_PAR Expr CL_PAR { $$ = $3; }
   ;
 
 

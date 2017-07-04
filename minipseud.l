@@ -16,6 +16,10 @@ if_statement "if"
 while_statement "while"
 for_statement "for"
 else_statement "else"
+function_statement "func"
+print "PRINT"
+printList "PRINTLIST"
+string \"([^\"]*)\"
 var   [a-z]+
 real      {int}("."{int})?{exp}?
 
@@ -34,6 +38,21 @@ real      {int}("."{int})?{exp}?
 "}"   return(CL_BRACKET);
 
 
+
+{function_statement} {
+	yylval.node = createNode(NTFUNC);
+    return(FUNCTION);
+}
+
+{print} {
+	yylval.node = createNode(NTPRINT);
+    return(PRINT);
+}
+
+{printList} {
+	yylval.node = createNode(NTPRINTLIST);
+    return(PRINTLIST);
+}
 
 {if_statement} {
 	yylval.node = createNode(NTIF);
@@ -54,6 +73,12 @@ real      {int}("."{int})?{exp}?
     return(FOR);
 }
 
+{string} {
+	yylval.node = createNode(NTSTRING);
+    yylval.node->var = (char*)_strdup(yytext);
+    return(STRING);
+}
+
 {var}    {
     yylval.node = createNode(NTVAR);
     yylval.node->var = (char*)_strdup(yytext);
@@ -66,6 +91,7 @@ real      {int}("."{int})?{exp}?
     return(NUM);
     }
 
+	
 "+"   { yylval.node = createNode(NTPLUS); return(PLUS); }
 "-"   { yylval.node = createNode(NTMIN); return(MIN); }
 "*"   { yylval.node = createNode(NTMULT); return(MULT); }
@@ -76,7 +102,7 @@ real      {int}("."{int})?{exp}?
 "<="  { yylval.node = createNode(NTINFOREQUAL); return(INFOREQUAL); }
 "<"  { yylval.node = createNode(NTINF); return(INF); }
 ">="  { yylval.node = createNode(NTSUPOREQUAL); return(SUPOREQUAL); }
-">="  { yylval.node = createNode(NTSUP); return(SUP); }
+">"  { yylval.node = createNode(NTSUP); return(SUP); }
 "="  { yylval.node = createNode(NTAFF); return(AFF); }
 
 
@@ -85,5 +111,7 @@ real      {int}("."{int})?{exp}?
  
 
 ";"    { return(COLON); }
+
+","    { return(COMA); }
 
 "\n"   { return(EOL); }
