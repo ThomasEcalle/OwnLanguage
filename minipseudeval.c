@@ -102,7 +102,8 @@ double evalExpr(Node *node) {
 			printf("Error, %s has not been initialized2 !" , node->children[0]->var);
 			exit(1);
 		}
-		case NTPLUS: return evalExpr(node->children[0])
+		case NTPLUS: 
+				return evalExpr(node->children[0])
 				+ evalExpr(node->children[1]);
 		case NTMIN: return evalExpr(node->children[0])
 				- evalExpr(node->children[1]);
@@ -207,7 +208,9 @@ void evalInst(Node* node) {
 		return;
 		
 	case NTCONCAT:
-		printf("%s%s" , removeQuotes((node->children[0])->var), removeQuotes((node->children[1])->var));
+		evalInst(node->children[0]);
+		evalInst(node->children[1]);
+		//printf("\n%s%s" , removeQuotes((node->children[0])->var), removeQuotes((node->children[1])->var));
 		return;
 	case NTPRINTLIST:
 			printVarList();
@@ -240,16 +243,24 @@ void evalInst(Node* node) {
 char* removeQuotes(char* mString)
 {
 	int i = 0;
-	char* result = malloc( sizeof(char) * ( strlen(mString) - 3) );
+	char* result = malloc( sizeof(char) * ( strlen(mString) - 2 ) );
 	int counter = 0;
 	for (i; i < strlen(mString); i++)
 	{
-		if (mString[i] != '\"')
+		if (mString[i] == '\\' && mString[i+1] == 'n')
+		{
+			result[counter] = '\n';
+			counter++;
+			i += 2;
+		}
+		if (mString[i] != '"')
 		{
 			result[counter] = mString[i];
 			counter++;
 		}
 	}
+	
+	result[counter] = '\0';
 	
 	return result;
 }
@@ -280,7 +291,6 @@ variable* getVariableByName(char *vName)
 void printVarList()
 {
 	int empty = 0;
-	printf("toto\n");
 	variable *tmp = list;
 	
 	while(tmp != NULL)
@@ -290,7 +300,7 @@ void printVarList()
 			if (empty == 0)
 			{
 				empty = 1;
-				printf("List of all declared variables:\n");
+				printf("\nList of all declared variables:\n");
 			}
 			printf("Name: %s\tValue: %f\n", tmp->name,tmp->val);
 		}

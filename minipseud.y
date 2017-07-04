@@ -32,6 +32,7 @@ Node root;
 %type   <node> FUNC
 %type   <node> ARG
 %type   <node> ARGS
+%type   <node> CONCAT
   
 
 %left OR
@@ -101,6 +102,7 @@ ARG:
 	VAR { $$ = $1; }
 	|NUM { $$ = $1; }
 	;
+
 FUNC:
 	FUNCTION VAR OP_PAR ARGS CL_PAR OP_BRACKET Instlist CL_BRACKET
 	{
@@ -118,12 +120,22 @@ BoolExpr:
 	| Expr SUPOREQUAL Expr { $$ = nodeChildren($2,$1,$3); }
 
 	;
+	
+CONCAT:
+	{ printf("yoooooooooooo"); }
+	| Expr { $$ = $1; }
+	| Expr PLUS CONCAT 
+		{ 
+			printf("yoyoyo");
+			$$ = nodeChildren(createNode(NTCONCAT), $1, $3); 
+		}
+	
+	;
 Expr:
   NUM			{ $$ = $1; }
   | VAR { $$ = $1; }
   | PRINTLIST { $$ = $1; }
   | STRING { $$ = $1; }
-  | STRING PLUS STRING { $$ = nodeChildren(createNode(NTCONCAT), $1, $3); }
   | VAR OP_PAR ARGS CL_PAR { $$ = nodeChildren(createNode(NTFUNC2), $1, $3);  }
   | Expr PLUS Expr   { $$ = nodeChildren($2, $1, $3); }
   | Expr MIN Expr      { $$ = nodeChildren($2, $1, $3); }
@@ -133,7 +145,7 @@ Expr:
   | Expr POW Expr      { $$ = nodeChildren($2, $1, $3); }
   | OP_PAR Expr CL_PAR { $$ = $2; }
   | BoolExpr {$$ = $1;}
-  | PRINT OP_PAR Expr CL_PAR { $$ = $3; }
+  | PRINT OP_PAR CONCAT CL_PAR { $$ = $3; }
   ;
 
 

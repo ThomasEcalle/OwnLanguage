@@ -32,7 +32,6 @@ const char* node2String(Node *node) {
 		sprintf(res, "NTNUM -> %f", node->val);
 		return res;
 	 
-
 	case NTPLUS:  return "NTPLUS";
 	case NTARGS:  return "NTARGS";
 	case NTMIN:   return "NTMIN";
@@ -42,10 +41,33 @@ const char* node2String(Node *node) {
 	case NTDOUBLEEQUAL:   return "NTDOUBLEEQUAL";
 	case NTAFF:   return "NTAFF";
 	case NTIF:   return "NTIF";
-	case NTVAR:   
-			res = (char *)malloc(sizeof(char) * 32);
-			sprintf(res, "NTVAR -> %s", node->var);
+	case NTWHILE : return "NTWHILE";
+	case NTFOR : return "NTFOR";
+	case NTINF: return "NTINF";
+	case NTELSE : return "NTELSE";
+	case NTIFELSE : return "NTIFELSE";
+	case NTSUP: return "NTSUP";
+	case NTINFOREQUAL: return "NTINFOREQUAL";
+	case NTSUPOREQUAL: return "NTSUPOREQUAL";
+	case NTCONCAT: return "NTCONCAT";
+	case NTDIFFERENT: return "NTDIFFERENT";
+	
+	case NTVAR:
+			if (strlen(node->var) > 0){
+				res = (char *)malloc(sizeof(char) * 32);
+				sprintf(res, "NTVAR -> %s", node->var);
+			}
+			
 			return res;
+			
+	case NTFUNC: return "NTFUNCTION";
+	case NTFUNC2: return "NTFUNC2";
+	case NTPRINTLIST: return "NTPRINTLIST";
+	
+	case NTSTRING: 
+		res = (char*) malloc(sizeof(char) * 32);
+		sprintf(res, "NTSTRING_TO_PRINT -> %s",node->var);
+		return res;
 	
 	default: return "UNK";
 	};
@@ -77,7 +99,7 @@ void printGraphRecu(Node *node, int n) {
 	
 	// Hack : No children only if null or number 
 	if ((node->children != NULL) && 
-		(node->type != NTNUM)  ) {
+		(node->type != NTNUM && node->type != NTVAR && node->type != NTSTRING)  ) {
 		printGraphRecu(node->children[0], n+1);
 		printGraphRecu(node->children[1], n+1);
 	}

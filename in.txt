@@ -1,4 +1,3 @@
-PRINTLIST;
 toto = 5;
 toto;
 toto=2;
