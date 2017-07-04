@@ -1,16 +1,3 @@
-PRINTLIST;
 toto = 5;
-toto;
-func chabada(tata){PRINT("JE SUIS CHABADA");PRINT("ou pas");PRINTLIST;toto = toto * toto; titi=42;toto+titi;}
-toto=2;
-chabada();
-chabada(toto);
-toto = 100;
-if (toto > 10){toto = 7;titi=42;titi+toto;} else {42;}
-100 != 42;
-babar=123;
-jean=12;
-PRINT(100 < 200);
-PRINT("met poce bleu tout de suite" + " ok" );
-PRINTLIST;
+PRINT("thomas " + "babar" + "mickey");
 
