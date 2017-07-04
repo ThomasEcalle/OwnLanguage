@@ -19,7 +19,7 @@ Node root;
 }
 
 
-%token   <node> NUM VAR STRING PRINT PRINTLIST
+%token   <node> NUM VAR STRING PRINT PRINTLIST 
 %token   <node> PLUS MIN MULT DIV POW AFF IF ELSE DOUBLEEQUAL WHILE DIFFERENT INF SUP INFOREQUAL SUPOREQUAL FOR FUNCTION COMA
 %token   OP_PAR CL_PAR OP_BRACKET CL_BRACKET COLON
 %token   EOL
@@ -122,17 +122,15 @@ BoolExpr:
 	;
 	
 CONCAT:
-	{ printf("yoooooooooooo"); }
-	| Expr { $$ = $1; }
-	| Expr PLUS CONCAT 
-		{ 
-			printf("yoyoyo");
-			$$ = nodeChildren(createNode(NTCONCAT), $1, $3); 
-		}
+	Expr { $$ = $1; }
+	| Expr PLUS CONCAT
+	{ 
+		$$ = nodeChildren(createNode(NTCONCAT), $1, $3); 
+	}
 	
 	;
 Expr:
-  NUM			{ $$ = $1; }
+  NUM { $$ = $1; }
   | VAR { $$ = $1; }
   | PRINTLIST { $$ = $1; }
   | STRING { $$ = $1; }

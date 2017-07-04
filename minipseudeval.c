@@ -21,6 +21,8 @@ variablesList list = NULL;
 
 variable* getVariableByName(char *vName);
 void addVariable(char *newName, double newValue,Node *funcNode);
+void deleteVariableByName(char* name);
+
 char* removeQuotes(char* mString);
 void printVarList();
 
@@ -88,10 +90,11 @@ double evalExpr(Node *node) {
 			evalInst(func->funcNode->children[1]);
 			if (numberOfArgsEx > 0)
 			{
+				
 				funcArgs = func->funcNode->children[0]->children[1];
 				while (funcArgs && funcArgs->var && funcArgs->type != NTEMPTY)
 				{
-					//deleteVariableByName(funcArgs->children[0]->var);
+					deleteVariableByName(funcArgs->children[0]->var);
 					funcArgs = funcArgs->children[1];
 				}
 			}
@@ -203,14 +206,13 @@ void evalInst(Node* node) {
 		}
 		return;
 	case NTSTRING:
-		
 		printf("%s" , removeQuotes(node->var));
 		return;
 		
 	case NTCONCAT:
 		evalInst(node->children[0]);
 		evalInst(node->children[1]);
-		//printf("\n%s%s" , removeQuotes((node->children[0])->var), removeQuotes((node->children[1])->var));
+		//printf("\nyoyoyoyo : %s%s" , removeQuotes((node->children[0])->var), removeQuotes((node->children[1])->var));
 		return;
 	case NTPRINTLIST:
 			printVarList();
@@ -288,6 +290,39 @@ variable* getVariableByName(char *vName)
 	
 	return result;
 }
+
+/*
+	Used in order to delete a variable after function scope
+*/
+void deleteVariableByName(char* name)
+{
+	
+	variable *last = list;
+	
+	if (strcmp(last->name,name) == 0){
+		list = last->next;
+		free(last);
+		return;
+	}
+	
+	variable *tmp = list->next;
+	
+	while(tmp != NULL)
+	{
+		if (strcmp(tmp->name,name) == 0)
+		{
+			last->next = tmp->next;
+			free(tmp);
+			return;
+		}
+		
+		last = tmp;
+		tmp = tmp->next;
+		
+	}
+}
+
+
 void printVarList()
 {
 	int empty = 0;

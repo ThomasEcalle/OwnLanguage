@@ -2,7 +2,7 @@ toto = 5;
 toto;
 toto=2;
 toto = 100;
-if (toto > 10){toto = 7;titi=42;titi+toto;} else {42;}
+if (toto > 10){toto = 7;titi=42;titi+toto;banane = 18;} else {42;}
 100 != 42;
 babar=123;
 jean=12;
@@ -15,7 +15,12 @@ toto=12;
 toto;
 func chabada(titi,tutu){toto+titi-tutu;}
 chabada(14,17);
-func testa() {PRINT("tototo"); chabada(1,30);}
+func testa() {PRINT("tototo : "); chabada(1,30);}
 testa();
+
+
+
+PRINT("du couscous " + 42);
+
 
 

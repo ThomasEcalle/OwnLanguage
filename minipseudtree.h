@@ -32,7 +32,9 @@ enum NodeType {
 	NTSTRING = 343,
 	NTPRINT = 344,
 	NTCONCAT = 345,
-	NTPRINTLIST = 346
+	NTPRINTLIST = 346,
+	
+	NTDOT = 347
 };
    
 typedef struct Node {
